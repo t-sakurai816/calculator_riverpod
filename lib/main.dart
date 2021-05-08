@@ -54,11 +54,27 @@ class _MainPageState extends State<MainPage> {
         body: SafeArea(
           child: Column(
             children: [
-              Expanded(child: Container()),
+              Expanded(child: buildResult()),
               Expanded(flex: 2, child: buildButtons())
             ],
           ),
         ),
+      );
+
+  Widget buildResult() => Column(
+        children: [
+          Text(
+            '0',
+            overflow: TextOverflow.ellipsis,
+            style: TextStyle(color: Colors.white, fontSize: 36),
+          ),
+          const SizedBox(height: 24),
+          Text(
+            '0',
+            overflow: TextOverflow.ellipsis,
+            style: TextStyle(color: Colors.grey, fontSize: 18),
+          )
+        ],
       );
 
   Widget buildButtons() => Container(
