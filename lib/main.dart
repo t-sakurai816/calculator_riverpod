@@ -42,9 +42,13 @@ class _MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(
+          centerTitle: false, // 中央寄せを解除
           elevation: 0,
           backgroundColor: Colors.transparent,
-          title: Text(widget.title),
+          title: Container(
+            margin: EdgeInsets.only(left: 8),
+            child: Text(widget.title),
+          ),
         ),
       );
 }
