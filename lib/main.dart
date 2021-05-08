@@ -116,7 +116,7 @@ class _MainPageState extends State<MainPage> {
             .map((text) => ButtonWidget(
                   text: text,
                   onClicked: () => onClickedButton(text),
-                  onClickedLong: () => print(text),
+                  onClickedLong: () => onClickedButtonLong(text),
                 ))
             .toList(),
       ),
@@ -139,6 +139,14 @@ class _MainPageState extends State<MainPage> {
       default:
         calculator.append(buttonText);
         break;
+    }
+  }
+
+  void onClickedButtonLong(String text) {
+    final calculator = context.read(calculatorProvider.notifier);
+
+    if (text == '<') {
+      calculator.reset();
     }
   }
 }
