@@ -61,20 +61,27 @@ class _MainPageState extends State<MainPage> {
         ),
       );
 
-  Widget buildResult() => Column(
-        children: [
-          Text(
-            '0',
-            overflow: TextOverflow.ellipsis,
-            style: TextStyle(color: Colors.white, fontSize: 36),
-          ),
-          const SizedBox(height: 24),
-          Text(
-            '0',
-            overflow: TextOverflow.ellipsis,
-            style: TextStyle(color: Colors.grey, fontSize: 18),
-          )
-        ],
+  Widget buildResult() => Container(
+        padding: const EdgeInsets.all(24),
+        child: Column(
+          // 下寄せ
+          mainAxisAlignment: MainAxisAlignment.end,
+          //左寄せ
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Text(
+              '0',
+              overflow: TextOverflow.ellipsis,
+              style: TextStyle(color: Colors.white, fontSize: 36),
+            ),
+            const SizedBox(height: 24),
+            Text(
+              '0',
+              overflow: TextOverflow.ellipsis,
+              style: TextStyle(color: Colors.grey, fontSize: 18),
+            )
+          ],
+        ),
       );
 
   Widget buildButtons() => Container(
