@@ -1,7 +1,9 @@
 import 'package:calculator_riverpod/colors.dart';
+import 'package:calculator_riverpod/riverpod.dart';
 import 'package:calculator_riverpod/widget/button_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -10,7 +12,7 @@ Future main() async {
     DeviceOrientation.portraitDown,
   ]);
 
-  runApp(MyApp());
+  runApp(ProviderScope(child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -61,27 +63,31 @@ class _MainPageState extends State<MainPage> {
         ),
       );
 
-  Widget buildResult() => Container(
-        padding: const EdgeInsets.all(24),
-        child: Column(
-          // 下寄せ
-          mainAxisAlignment: MainAxisAlignment.end,
-          //左寄せ
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Text(
-              '0',
-              overflow: TextOverflow.ellipsis,
-              style: TextStyle(color: Colors.white, fontSize: 36),
+  Widget buildResult() => Consumer(
+        builder: (context, watch, child) {
+          final state = watch(calculatorProvider);
+          return Container(
+            padding: const EdgeInsets.all(24),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.end,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Text(
+                  state.equation,
+                  overflow: TextOverflow.ellipsis,
+                  style:
+                      TextStyle(color: Colors.white, fontSize: 36, height: 1),
+                ),
+                const SizedBox(height: 24),
+                Text(
+                  state.result,
+                  overflow: TextOverflow.ellipsis,
+                  style: TextStyle(color: Colors.grey, fontSize: 18),
+                ),
+              ],
             ),
-            const SizedBox(height: 24),
-            Text(
-              '0',
-              overflow: TextOverflow.ellipsis,
-              style: TextStyle(color: Colors.grey, fontSize: 18),
-            )
-          ],
-        ),
+          );
+        },
       );
 
   Widget buildButtons() => Container(
@@ -109,11 +115,17 @@ class _MainPageState extends State<MainPage> {
         children: row
             .map((text) => ButtonWidget(
                   text: text,
-                  onClicked: () => print(text),
+                  onClicked: () => onClickedButton(text),
                   onClickedLong: () => print(text),
                 ))
             .toList(),
       ),
     );
+  }
+
+  void onClickedButton(String buttonText) {
+    final calculator = context.read(calculatorProvider.notifier);
+
+    calculator.append(buttonText);
   }
 }
