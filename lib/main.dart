@@ -1,3 +1,4 @@
+import 'package:calculator_riverpod/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -12,15 +13,38 @@ Future main() async {
 }
 
 class MyApp extends StatelessWidget {
+  static final String title = 'Calculator';
+
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text('YouTubeアプリ'),
+  Widget build(BuildContext context) => MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: title,
+        theme: ThemeData(
+          scaffoldBackgroundColor: MyColors.background1,
+          visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
-        body: Container(),
-      ),
-    );
-  }
+        home: MainPage(title: title),
+      );
+}
+
+class MainPage extends StatefulWidget {
+  final String title;
+
+  const MainPage({
+    required this.title,
+  });
+
+  @override
+  _MainPageState createState() => _MainPageState();
+}
+
+class _MainPageState extends State<MainPage> {
+  @override
+  Widget build(BuildContext context) => Scaffold(
+        appBar: AppBar(
+          elevation: 0,
+          backgroundColor: Colors.transparent,
+          title: Text(widget.title),
+        ),
+      );
 }
