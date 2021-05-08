@@ -99,7 +99,7 @@ class _MainPageState extends State<MainPage> {
         child: Column(
           children: [
             buildButtonRow('AC', '<', ' ', '÷'),
-            buildButtonRow('7', '8', '9', '×'),
+            buildButtonRow('7', '8', '9', '⨯'),
             buildButtonRow('4', '5', '6', '-'),
             buildButtonRow('1', '2', '3', '+'),
             buildButtonRow('0', '.', ' ', '='),
