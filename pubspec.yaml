@@ -33,7 +33,7 @@ dependencies:
   math_expressions: ^2.0.1
 
   #state management
-  flutter_riverpod: ^0.12.1
+  flutter_riverpod: ^0.14.0+3
 
 dev_dependencies:
   flutter_test:
