@@ -52,7 +52,7 @@ class ButtonWidget extends StatelessWidget {
     switch (buttonText) {
       case "+":
       case '-':
-      case '×':
+      case '⨯':
       case '÷':
       case '=':
         return MyColors.operators;
