@@ -127,8 +127,14 @@ class _MainPageState extends State<MainPage> {
     final calculator = context.read(calculatorProvider.notifier);
 
     switch (buttonText) {
+      case 'AC':
+        calculator.reset();
+        break;
       case '=':
         calculator.equals();
+        break;
+      case '<':
+        calculator.delete();
         break;
       default:
         calculator.append(buttonText);

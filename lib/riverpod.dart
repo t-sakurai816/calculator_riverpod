@@ -10,6 +10,28 @@ final calculatorProvider =
 class CalculatorNotifier extends StateNotifier<Calculator> {
   CalculatorNotifier() : super(Calculator());
 
+  void delete() {
+    final equation = state.equation;
+
+    if (equation.isNotEmpty) {
+      final newEquation = equation.substring(0, equation.length - 1);
+
+      if (newEquation.isEmpty) {
+        reset();
+      } else {
+        state = state.copy(equation: newEquation);
+        calculate();
+      }
+    }
+  }
+
+  void reset() {
+    final equation = '0';
+    final result = '0';
+
+    state = state.copy(equation: equation, result: result);
+  }
+
   void append(String buttonText) {
     final equation = () {
       if (Utils.isOperator(buttonText) &&
@@ -33,10 +55,13 @@ class CalculatorNotifier extends StateNotifier<Calculator> {
     //正しいコマンドに置き換え
     final expression = state.equation.replaceAll('⨯', '*').replaceAll('÷', '/');
 
-    final exp = Parser().parse(expression);
-    final model = ContextModel();
+    try {
+      final exp = Parser().parse(expression);
+      final model = ContextModel();
 
-    final result = '${exp.evaluate(EvaluationType.REAL, model)}';
-    state = state.copy(result: result);
+      final result = '${exp.evaluate(EvaluationType.REAL, model)}';
+      state = state.copy(result: result);
+      //最後に計算符号がある時に計算しない
+    } catch (e) {}
   }
 }
