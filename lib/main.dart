@@ -126,6 +126,13 @@ class _MainPageState extends State<MainPage> {
   void onClickedButton(String buttonText) {
     final calculator = context.read(calculatorProvider.notifier);
 
-    calculator.append(buttonText);
+    switch (buttonText) {
+      case '=':
+        calculator.equals();
+        break;
+      default:
+        calculator.append(buttonText);
+        break;
+    }
   }
 }
