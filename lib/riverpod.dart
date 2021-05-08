@@ -32,6 +32,14 @@ class CalculatorNotifier extends StateNotifier<Calculator> {
     state = state.copy(equation: equation, result: result);
   }
 
+  void resetResult() {
+    final equation = state.result;
+    state = state.copy(
+      equation: equation,
+      shouldAppend: false,
+    );
+  }
+
   void append(String buttonText) {
     final equation = () {
       if (Utils.isOperator(buttonText) &&
@@ -39,16 +47,22 @@ class CalculatorNotifier extends StateNotifier<Calculator> {
         final newEquation =
             state.equation.substring(0, state.equation.length - 1);
         return newEquation + buttonText;
-      } else {
+      } else if (state.shouldAppend) {
         return state.equation == '0' ? buttonText : state.equation + buttonText;
+      } else {
+        return Utils.isOperator(buttonText)
+            ? state.equation + buttonText
+            : buttonText;
       }
     }();
 
-    state = state.copy(equation: equation);
+    state = state.copy(equation: equation, shouldAppend: true);
+    calculate();
   }
 
   void equals() {
     calculate();
+    resetResult();
   }
 
   void calculate() {
