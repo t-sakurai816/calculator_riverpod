@@ -1,4 +1,5 @@
 import 'package:calculator_riverpod/colors.dart';
+import 'package:calculator_riverpod/widget/button_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -50,5 +51,46 @@ class _MainPageState extends State<MainPage> {
             child: Text(widget.title),
           ),
         ),
+        body: SafeArea(
+          child: Column(
+            children: [
+              Expanded(child: Container()),
+              Expanded(flex: 2, child: buildButtons())
+            ],
+          ),
+        ),
       );
+
+  Widget buildButtons() => Container(
+        padding: EdgeInsets.all(16),
+        decoration: BoxDecoration(
+          color: MyColors.background2,
+          borderRadius: BorderRadius.vertical(top: Radius.circular(32)),
+        ),
+        child: Column(
+          children: [
+            buildButtonRow('AC', '<', ' ', '÷'),
+            buildButtonRow('7', '8', '9', '×'),
+            buildButtonRow('4', '5', '6', '-'),
+            buildButtonRow('1', '2', '3', '+'),
+            buildButtonRow('0', '.', ' ', '='),
+          ],
+        ),
+      );
+
+  buildButtonRow(String first, String second, String third, String fourth) {
+    final row = [first, second, third, fourth];
+
+    return Expanded(
+      child: Row(
+        children: row
+            .map((text) => ButtonWidget(
+                  text: text,
+                  onClicked: () => print(text),
+                  onClickedLong: () => print(text),
+                ))
+            .toList(),
+      ),
+    );
+  }
 }
