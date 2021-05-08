@@ -77,12 +77,14 @@ class _MainPageState extends State<MainPage> {
                   overflow: TextOverflow.ellipsis,
                   style:
                       TextStyle(color: Colors.white, fontSize: 36, height: 1),
+                  textAlign: TextAlign.right,
                 ),
                 const SizedBox(height: 24),
                 Text(
                   state.result,
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(color: Colors.grey, fontSize: 18),
+                  textAlign: TextAlign.right,
                 ),
               ],
             ),
