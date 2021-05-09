@@ -149,8 +149,21 @@ class _MainPageState extends State<MainPage> {
   void onClickedButtonLong(String text) {
     final calculator = context.read(calculatorProvider.notifier);
 
-    if (text == '<') {
-      calculator.reset();
+    switch (text) {
+      case ' ':
+        break;
+      case 'AC':
+        calculator.reset();
+        break;
+      case '=':
+        calculator.equals();
+        break;
+      case '<':
+        calculator.reset();
+        break;
+      default:
+        calculator.append(text);
+        break;
     }
   }
 }
