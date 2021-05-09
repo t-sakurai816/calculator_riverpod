@@ -1,14 +1,14 @@
-import 'package:calculator_riverpod/model/calculator.dart';
+import 'package:calculator_riverpod/model/calculator_model.dart';
 import 'package:calculator_riverpod/utils.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:math_expressions/math_expressions.dart';
 
 final calculatorProvider =
-    StateNotifierProvider<CalculatorNotifier, Calculator>(
+    StateNotifierProvider<CalculatorNotifier, CalculatorModel>(
         (ref) => CalculatorNotifier());
 
-class CalculatorNotifier extends StateNotifier<Calculator> {
-  CalculatorNotifier() : super(Calculator());
+class CalculatorNotifier extends StateNotifier<CalculatorModel> {
+  CalculatorNotifier() : super(CalculatorModel());
 
   void delete() {
     final equation = state.equation;
