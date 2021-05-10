@@ -42,19 +42,23 @@ class CalculatorNotifier extends StateNotifier<CalculatorModel> {
 
   void append(String buttonText) {
     final equation = () {
-      // 記号のとき
-      if (Utils.isOperator(buttonText) &&
-          Utils.isOperatorAtEnd(state.equation)) {
-        final newEquation =
-            state.equation.substring(0, state.equation.length - 1);
-        return newEquation + buttonText;
-        //追加する必要があるとき
-      } else if (state.shouldAppend) {
-        return state.equation == '0' ? buttonText : state.equation + buttonText;
-      } else {
-        return Utils.isOperator(buttonText)
-            ? state.equation + buttonText
-            : buttonText;
+      if (state.equation.length <= 14) {
+        // 記号のとき
+        if (Utils.isOperator(buttonText) &&
+            Utils.isOperatorAtEnd(state.equation)) {
+          final newEquation =
+              state.equation.substring(0, state.equation.length - 1);
+          return newEquation + buttonText;
+          //追加する必要があるとき
+        } else if (state.shouldAppend) {
+          return state.equation == '0'
+              ? buttonText
+              : state.equation + buttonText;
+        } else {
+          return Utils.isOperator(buttonText)
+              ? state.equation + buttonText
+              : buttonText;
+        }
       }
     }();
 
